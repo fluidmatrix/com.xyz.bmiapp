@@ -34,8 +34,8 @@ A simple Android application developed in **Kotlin** that calculates the **Body 
 
 *Insert your screenshot here to show the working app*
 
-![example.png](src/main/java/com/example/comxyzbmiapp/example.png)
-![img.png](src/main/java/com/example/comxyzbmiapp/img.png)
+<img width="408" height="738" alt="img" src="https://github.com/user-attachments/assets/4f184038-83ee-4c1d-bec6-95fc4a4173ec" />
+<img width="650" height="938" alt="example" src="https://github.com/user-attachments/assets/699c9c1b-478d-49b2-95e9-204331dd6423" />
 
 ---
 

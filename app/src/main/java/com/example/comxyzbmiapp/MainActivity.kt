@@ -17,6 +17,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val etName = findViewById<EditText>(R.id.etName)
+        val dbHelper = BMIDatabaseHelper(this)
         val etAge = findViewById<EditText>(R.id.etAge)
         val etWeight = findViewById<EditText>(R.id.etWeight)
         val etHeight = findViewById<EditText>(R.id.etHeight)
@@ -42,6 +44,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             val person = Person(
+                etName.text.toString(),
                 ageText.toInt(),
                 gender,
                 weightText.toDouble(),
@@ -51,6 +54,23 @@ class MainActivity : AppCompatActivity() {
             val bmi = person.calculateBMI()
             val bmiFormatted = String.format("%.2f", bmi)  // Round to 2 decimal places
             val status = person.getBMIStatus()
+
+            val inserted = dbHelper.insertBMIRecord(
+                person.name,
+                person.age,
+                person.gender,
+                person.weight,
+                person.height,
+                bmi,
+                status.name
+            )
+
+            if (inserted) {
+                Toast.makeText(this, "BMI Saved Successfully!", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Failed to Save Data", Toast.LENGTH_SHORT).show()
+            }
+
 
             when (status) {
                 BMIStatus.UNDERWEIGHT -> {
@@ -67,5 +87,28 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+    private fun loadHistory() {
+
+        val dbHelper = BMIDatabaseHelper(this)
+        val cursor = dbHelper.getAllRecords()
+
+        val historyList = StringBuilder()
+
+        while (cursor.moveToNext()) {
+            val name = cursor.getString(cursor.getColumnIndexOrThrow("name"))
+            val bmi = cursor.getDouble(cursor.getColumnIndexOrThrow("bmi"))
+            val status = cursor.getString(cursor.getColumnIndexOrThrow("status"))
+
+            historyList.append("$name - BMI: %.2f ($status)\n".format(bmi))
+        }
+
+        cursor.close()
+
+        findViewById<TextView>(R.id.tvHistory).text = historyList.toString()
+    }
+    override fun onResume() {
+        super.onResume()
+        loadHistory()
     }
 }

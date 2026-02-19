@@ -1,9 +1,9 @@
 package com.example.comxyzbmiapp
 
-import kotlin.math.pow
-import kotlin.math.round
+
 
 class Person(
+    val name: String,
     val age: Int,
     val gender: String,
     val weight: Double,

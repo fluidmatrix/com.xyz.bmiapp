@@ -33,8 +33,6 @@ A simple Android application developed in **Kotlin** that calculates the **Body 
 ## *Screenshots*
 
 *Insert your screenshot here to show the working app*
-
-<img width="408" height="738" alt="img" src="https://github.com/user-attachments/assets/4f184038-83ee-4c1d-bec6-95fc4a4173ec" />
 <img width="944" height="827" alt="Screenshot 2026-02-19 113034" src="https://github.com/user-attachments/assets/002f7e4d-6441-4191-8bcb-3356a86c9128" />
 
 
